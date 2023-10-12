@@ -20,9 +20,12 @@ public class StudentLogic : IStudentLogic
         return _studentsRepository.GetStudentById(id);
     }
 
-    public IEnumerable<Student> GetStudents()
+    public IEnumerable<Student> GetStudents(int? age)
     {
-        return _studentsRepository.GetStudents();
+        if (age == null)
+            return _studentsRepository.GetStudents();
+        else
+            return _studentsRepository.GetStudents().Where(x => x.Age == age);
     }
 
     public void InsertStudents(Student? student)
